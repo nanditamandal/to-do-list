@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="HTML,CSS,JavaScript">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
 	<title>To-Do List</title>
     <link rel="stylesheet" href="style.css">
 	
@@ -10,7 +14,7 @@
 	
 	
 		<div>
-		<input type="hidden" id="number" name="number" value=0>
+		<input type="hidden" id="number" name="number" value=''>
 		<label for="item">Add Item:</label>
 		<input type="text" id="item" name="item"  />
         <label for="time">Add Time:</label>
@@ -36,13 +40,7 @@
 
         function myFunction(){
 			const li = document.createElement('li');
-			
-			if (pattern.test(item.value.trim())=== false) {
-				alert('Please enter only character...');
-				return;
-			} 
-			
-            	// e.preventDefault();
+			console.log(index.value);
 
 			if (item.value.trim() === '') {
 				alert('Please enter a task...');
@@ -52,76 +50,61 @@
 				alert('Please enter time ....');
 				return;
 			}
-			// if (index.value.trim() > 0) {
 
-
-			// 		const myList = document.getElementById('task-list');
-			// 		console.log( myList.children.length);
-
-			// 		for (let i = 0; i < myList.children.length; i++) {
-			// 			const listItem = myList.children[i]; //li
-			// 			const indexNumber = listItem.children[0].textContent;
-			// 			if (indexNumber === index.value) {
-			// 				let editList=listItem;
-			// 				listItem.querySelector('.todo-item-text').innerHTML=item.value;
-			// 				listItem.querySelector('.todo-item-time').innerHTML=time.value;
-
-			// 				item.value='';
-			// 				time.value = '';
-			// 			//console.log('Found:', listItem);
-			// 			break;
-			// 			}
-			// 		}
-			// 	return;
-			// }
+			if (pattern.test(item.value.trim()) === false) {
+				alert('Please enter only character...');
+				return;
+			} 
 
 			if (index.value.trim() > 0) {
 
+				const myList = document.getElementById('task-list');
+				
 
-const myList = document.getElementById('task-list');
-console.log( myList.children.length);
+				for (let i = 0; i < myList.children.length; i++) {
+					const listItem = myList.children[i]; 
+					const indexNumber = listItem.children[0].textContent;
+					if (indexNumber == index.value) {
+						console.log(indexNumber);
+						listItem.querySelector('.todo-item-text').innerHTML=item.value;
+						listItem.querySelector('.todo-item-time').innerHTML=time.value;
 
-for (let i = 0; i < myList.children.length; i++) {
-	const listItem = myList.children[i]; //li
-	const indexNumber = listItem.children[0].textContent;
-	if (indexNumber === index.value) {
-		let editList=listItem;
-		listItem.querySelector('.todo-item-text').innerHTML=item.value;
-		listItem.querySelector('.todo-item-time').innerHTML=time.value;
-
-		item.value='';
-		time.value = '';
-	//console.log('Found:', listItem);
-	break;
-	}
-}
-return;
-}
-			
-            li.innerHTML = `
-			<p class="todo-item-number">${number}</p>
-			<p class="todo-item-text">${item.value}</p>
-			<p class="todo-item-time">${time.value}</p>
-			<p><button class="delete-button">Delete</button>
-			<button class="update-button">Update</button></p>
-			`;
+						item.value='';
+						time.value = '';
+						index.value = '';
+				
+					break;
+					}
+				}
+				return;
+			}
+			if(index.value.trim() === '') {
+				console.log(number);
+				li.innerHTML = `
+					<p class="todo-item-number">${number}</p>
+					<p class="todo-item-text">${item.value}</p>
+					<p class="todo-item-time">${time.value}</p>
+					<p><button class="delete-button">Delete</button>
+					<button class="update-button">Update</button></p>
+					`;
          
-			ul.appendChild(li);
-			console.log(li);
+				ul.appendChild(li);
+				console.log("add li", ul);
 
-            item.value='';
-			time.value = '';
-			number++;
-            
-       
+				item.value='';
+				time.value = '';
+				number++;
+
+			}
 
         }
 		
 		ul.addEventListener('click', (e) => {
 			if (e.target.classList.contains('delete-button')) {
-				// e.target.parentElement.remove();
+				
 				e.target.parentElement.parentElement.remove();
 			}
+			console.log(ul);
 		});
        
 
